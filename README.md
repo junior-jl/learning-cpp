@@ -1,7 +1,8 @@
 # learning-cpp
+
 Notes and Exercises from my studies of C++
 
-The syllabus is based on https://www.educative.io/path/cpp-for-programmers
+The syllabus is based on <https://www.educative.io/path/cpp-for-programmers>
 
 ## Basics
 
