@@ -269,3 +269,131 @@ cin >> variable_name;
 ```
 
 We use a `cin` in combination with the extraction operator `>>` to take input from the user.
+
+## Operators
+
+An operator is a symbol that takes one or more values as input and outputs another value after perfoming a particular operation.
+
+**Operands** are the data items on which an operation is being done.
+
+### Types of operators
+
+- **Unary** operator -> operates on one operand.
+- **Binary** operator -> operates on two operands.
+- **Ternary** operator -> operates on three operands.
+
+### Arithmetic Operators
+
+They are used to perform numeric operations on operands.
+
+| **Operator** |  **Operation** |                        **Use**                        |
+|:------------:|:--------------:|:-----------------------------------------------------:|
+|       +      |    Addition    |               Adds operand1 and operand2              |
+|       -      |   Subtraction  |            Subtracts operand2 from operand1           |
+|      \*      | Multiplication |            Multiplies operand1 and operand2           |
+|       /      |    Division    |             Divides operand1 and operand2             |
+|      \%      |     Modulus    | Returns remainder after dividing operand1 by operand2 |
+
+The result of / operator between `int`s is also of type `int`, so if it is necessary, the result will be truncated. If you want a quotient with a fractional part, use `float` or `double`.
+
+Using \% with `float` operands will cause an error.
+
+### Assignment operator
+
+It takes the value on its right-hand side and assigns it to the operand on the left-hand side.
+
+In C++, there is only one assignment operator:
+
+| **Operator** |  **Operation**      |                        **Use**                        |
+|:------------:|:-------------------:|:-----------------------------------------------------:|
+|       =      |    Assigns a value  |     Assigns the value of operand2 to operand1         |
+
+### Compound assignment operator
+
+It is used to perform an operation and then assign the result to the operand on the left-hand side.
+
+| **Operator** |         **Operation**         |                                              **Use**                                             |
+|:------------:|:-----------------------------:|:------------------------------------------------------------------------------------------------:|
+|      +=      |    Addition and assignment    |               Adds operand1 and operand2, and then assign updated value to operand1              |
+|      -=      |   Subtraction and assignment  |            Subtracts operand2 from operand1, and then assign updated value to operand1           |
+|      \*=     | Multiplication and assignment |            Multiplies operand1 and operand2, and then assign updated value to operand1           |
+|      /=      |    Division and assignment    |              Divides operand1 by operand2, and then assign updated value to operand1             |
+|      \%=     |     Modulus and assignment    | Returns remainder after dividing operand1 by operand2, and then assign updated value to operand1 |
+
+### Relational Operators
+
+A relational operator compares the value of two operands. Its output is a `bool` data type.
+
+| **Operator** |       **Operation**      |                           **Use**                          |
+|:------------:|:------------------------:|:----------------------------------------------------------:|
+|       >      |       Greater than       |       Returns 1 if operand1 is greater than operand2       |
+|      >=      | Greater than or equal to | Returns 1 if operand1 is greater than or equal to operand2 |
+|       <      |         Less than        |         Returns 1 if operand1 is less than operand2        |
+|      <=      |   Less than or equal to  |   Returns 1 if operand1 is less than or equal to operand2  |
+|      ==      |         Equal to         |         Returns 1 if operand1 is equal to operand2         |
+|      !=      |       Not equal to       |       Returns 1 if operand1 is not equal to operand2       |
+
+When applied to `char` operands, the compiler will compare the ASCII values of the characters.
+
+Writing relational expressions without round brackets in the print statement will generate an error.
+
+### Logical Operators
+
+They are either used to combine two or more boolean operands or to negate the result of the original operand.
+
+| **Operator** | **Operation** |                              **Use**                              |
+|:------------:|:-------------:|:-----------------------------------------------------------------:|
+|       !      |      NOT      |                   Negates the value of operand1                   |
+|      &&      |      AND      |     Returns 1 if operand1 and operand2 both evaluates to true     |
+|     \|\|     |       OR      | Returns 1 if either operand1 or operand2 or both evaluate to true |
+
+They are generally used to control the flow of the program. They allow a program to decide the flow of execution based on certain conditions.
+
+### Bitwise Operators
+
+A bitwise operator performs bit by bit processing on the operands. It converts operands in decimal form into binary form, perform the particular bitwise operation, and then returns the result after converting the number back into decimal form.
+
+| **Operator** |  **Operation** |                                            **Use**                                           |        **Example**       |
+|:------------:|:--------------:|:--------------------------------------------------------------------------------------------:|:------------------------:|
+|       &      |   Bitwise AND  |         If the corresponding bit in both operands is 1, it will return 1, otherwise 0        |    1 & 1 = 1 // 1 & 0 = 0   |
+|      \|      |   Bitwise OR   | If the corresponding bit in at least one of the operands is 1, it will return 1, otherwise 0 |   1 \| 1 = 1 // 1 \| 0 = 1  |
+|      >>      |   Right shift  |   Move all the bits in operand1 to the right by the number of places specified in operand2   |        2 >> 1 = 1        |
+|      <<      |   Left shift   |    Move all the bits in operand1 to the left by the number of places specified in operand2   |        2 << 1 = 4        |
+|       ^      |   Bitwise XOR  |   If the corresponding bit in both the operands is opposite, it will return 1, otherwise 0   |    1 ^ 1 = 0 // 1 ^ 0 = 1   |
+|       ~      | Tilde operator |              It is bitwise NOT operator and inverts the bits of an integer value             | ~(0110) = 1001 // ~(7) = -8 |
+
+#### Right shift
+
+Right-shifting an `op1 >> op2` is equivalent to dividing op1 by $2^{op2}$.
+
+#### Left shift
+
+Left-shifting an `op1 << op2` is equivalent to multiplying op1 by $2^{op2}$.
+
+### Precedence andd Associativity
+
+In case there is more than one operator in an expression, **precedence** determines the order in which the operators should be evaluated. The operator with higher precedence will be evaluated first in an expression. For example, multiplication \* has higher precedence than addition +. Therefore, we first evaluate multiplication in an expression. 
+
+In case of parenthesis `()`, we first evaluate the expression inside the parenthesis.
+
+**Associativity** determines the order in which the operators with same precedence should be evaluated. 
+
+In left associativity, we evaluate the expression from left to right if two or more operators have the same precedence. For example, addition and subtraction have the same precedence.
+
+In right associativity, we evaluate the expression from right to left if two or more operations have the same precedence.
+
+#### Order of precedence (highest to lowest)
+
+|  **Category**  |             **Operators**            | **Associativity** |
+|:--------------:|:------------------------------------:|:-----------------:|
+| Multiplicative |                \* / \%               |   Left to right   |
+|    Additive    |                  + -                 |   Left to right   |
+|      Shift     |                 << >>                |   Left to right   |
+|    Equality    |                 == !=                |   Left to right   |
+|   Bitwise AND  |                   &                  |   Left to right   |
+|   Bitwise XOR  |                   ^                  |   Left to right   |
+|   Bitwise OR   |                  \|                  |   Left to right   |
+|   Logical AND  |                  &&                  |   Left to right   |
+|   Logical OR   |                 \|\|                 |   Left to right   |
+|   Conditional  |                  ?:                  |   Right to left   |
+|   Assignment   | = += -= \*= /= \%= >>= <<= &= ^= \|= |   Right to left   |
