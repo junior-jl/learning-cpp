@@ -10,9 +10,9 @@ The syllabus is based on <https://www.educative.io/path/cpp-for-programmers>
 - [x] Getting Started
 - [x] Variables and Constants
 - [x] Data Types and Input
-- [ ] Operators
-- [ ] Conditional Statements
-- [ ] Loops
+- [x] Operators
+- [x] Conditional Statements
+- [x] Loops
 - [ ] Functions
 - [ ] Recursion
 - [ ] Arrays

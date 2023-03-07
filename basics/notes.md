@@ -656,3 +656,206 @@ The break statement terminates the loop and transfers control to the very next s
 ### continue Statement
 
 The continue statement makes the compiler skip the current iteration and move to the next one.
+
+## Functions
+
+A function is a block of code that performs a particular task. It is also given a name.
+
+In C++, we have two types of functions:
+
+- Library functions
+- User-defined functions
+
+Library functions are also known as built-in functions. They are already defined in the C++ header files such as `<iostream>`, `<string>` and `<cmath>`.
+
+User-defined functions are defined by users according to their needs.
+
+### Advantages
+
+- Make the code reusable
+- Divide the code into small modules
+- Make the debugging of the program easier
+- Make the code neat
+- Avoid code repetition
+
+The purpose of a function is to define the code block once and then use it many times.
+
+### Function creation
+
+In C++, function creation consists of the following two steps:
+
+- Function declaration
+- Function definition
+
+#### Function declaration
+
+It tells the compiler about:
+
+- The return type of function
+- The function name
+- The number of parameters and their data types.
+
+```cpp
+return_type function_name (function_parameters);
+```
+
+The `return_type` specifies what type of data a function returns to the calling point after performing its task.
+
+It is possible for a function to return nothing in output. Such functions have a `void` return type.
+
+Whenever we declare a function, we give it a unique name (`function_name`). We then use the same name to call it throughout the program.
+
+When we call a function, we pass values to the function parameters. These values are known as arguments, or actual parameters. Passing parameters in a function is optional.
+
+#### Function definition
+
+It tells what a function will do when it is called.
+
+```cpp
+return_type function_name (function_parameters)
+{
+  function_body
+}
+```
+
+The function body consists of a group of statements that do a particular task. We write our function code inside the curly braces.
+
+### Calling a function
+
+The functions created in a program are not executed until we call them. When we call the function, control is given to the very first statement inside the called function.
+
+```cpp
+int main()
+{
+  function_name (values of parameters);
+
+  return 0;
+}
+```
+
+In C++, statements are executed from top to bottom. If we don't declare the function before `main()`, our program will be unaware of it and we will get a compilation error.
+
+### Function Parameters
+
+In C++, we have:
+
+- Formal parameters
+- Actual parameters
+
+Formal parameters are the variables defined in the function definition. These variables receive values from the calling function. Formal parameters are commonly known as parameters.
+
+Actual parameters are the variables or values passed to the function when it is called. These variables supply value to the called function. Actual parameters are commonly known as arguments.
+
+#### Default parameter values
+
+If we provide fewer or no arguments to the calling function, the default values of the parameters are used. We specify the default value in the function declaration using an equal sign.
+
+```cpp
+return_type function_name (formal_parameter = value);
+```
+
+If we specify the default value of the parameters, the parameters following it must have a default value. Otherwise, you get an error.
+
+#### Passing actual parameters to the function
+
+We can pass the actual parameters to the function in the following two ways:
+
+- Pass by value
+- Pass by reference
+
+### Pass by Value
+
+In pass by value, when we call a function, we pass the copy of the actual parameters to the formal parameters in the function. Hence, any changes made in the formal parameters inside the function will not affect the values of actual parameters in the main function.
+
+In C++, by default, actual parameters are passed by value to the function.
+
+#### Pass by Value Example
+
+```cpp
+#include <iostream>
+
+using namespace std;
+// function definition
+void passValue(int number) {
+  // Multiply the number by 10
+  number = number * 10;
+  cout << "Value of number inside the function = " << number << endl;
+}
+
+int main() {
+  // Initialize variable
+  int number = 10;
+  cout << "Value of number before function call = " << number << endl;
+  // Call function
+  passValue(number);
+  cout << "Value of number after function call = " << number << endl;
+
+  return 0;
+}
+```
+
+Output:
+
+```cpp
+Value of number before function call = 10
+Value of number inside the function = 100
+Value of number after function call = 10
+```
+
+### Pass by Reference
+
+In pass by reference, when we call a function, we pass the address of the actual parameters to the formal parameters in the function. Hence, any changes made in the formal parameters inside the function affect the values of actual parameters in the main function.
+
+To declare a function parameter as a reference, we have to add \& before the function parameter.
+
+#### Pass by Reference Example
+
+```cpp
+#include <iostream>
+
+using namespace std;
+// function definition
+void passReference(int &number) {
+  // Multiply the number by 10
+  number = number * 10;
+  cout << "Value of number inside the function = " << number << endl;
+}
+
+int main() {
+  // Initialize variable
+  int number = 10;
+  cout << "Value of number before function call = " << number << endl;
+  // Call function
+  passReference(number);
+  cout << "Value of number after function call = " << number << endl;
+
+  return 0;
+}
+```
+
+Output:
+
+```cpp
+Value of number before function call = 10
+Value of number inside the function = 100
+Value of number after function call = 100
+```
+
+### Scope of Variables
+
+The scope of a variable defines which part of the program that particular variable is accessible in. In C++, the variable can be either of these two:
+
+- Local variable
+- Global variable
+
+A local variable can only be accessed within the block in which it is declared.
+
+A block can be a function, loop, or conditional statement. These variables are created when the compiler executes that particular block and destroyed when the compiler exits that block.
+
+Global variables can be accessed from the point they are declared to the end of the program. They are declared at the very start of the program before defining any function.
+
+If two variables with the same name are declared twice within the same scope, the compiler will generate an error.
+
+### Function Overloading
+
+Function overloading is the concept of affecting a function's behaviour based on the number of parameters or their types.
