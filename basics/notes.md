@@ -372,11 +372,11 @@ Left-shifting an `op1 << op2` is equivalent to multiplying op1 by $2^{op2}$.
 
 ### Precedence andd Associativity
 
-In case there is more than one operator in an expression, **precedence** determines the order in which the operators should be evaluated. The operator with higher precedence will be evaluated first in an expression. For example, multiplication \* has higher precedence than addition +. Therefore, we first evaluate multiplication in an expression. 
+In case there is more than one operator in an expression, **precedence** determines the order in which the operators should be evaluated. The operator with higher precedence will be evaluated first in an expression. For example, multiplication \* has higher precedence than addition +. Therefore, we first evaluate multiplication in an expression.
 
 In case of parenthesis `()`, we first evaluate the expression inside the parenthesis.
 
-**Associativity** determines the order in which the operators with same precedence should be evaluated. 
+**Associativity** determines the order in which the operators with same precedence should be evaluated.
 
 In left associativity, we evaluate the expression from left to right if two or more operators have the same precedence. For example, addition and subtraction have the same precedence.
 
@@ -397,3 +397,262 @@ In right associativity, we evaluate the expression from right to left if two or 
 |   Logical OR   |                 \|\|                 |   Left to right   |
 |   Conditional  |                  ?:                  |   Right to left   |
 |   Assignment   | = += -= \*= /= \%= >>= <<= &= ^= \|= |   Right to left   |
+
+## Conditional Statements
+
+C++ supports the following conditional statements:
+
+- If statement
+- If-else statement
+- Nested else-if statement
+- Switch statement
+
+### If Statement
+
+The `if` statement instructs a compiler to execute a particular block of code when the condition evaluates to true.
+
+```cpp
+if (condition) {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+```
+
+In C++, a zero or null value is considered false, and non-zero values are considered true.
+
+### If-else Statement
+
+In the `if-else` statement, when the condition in an `if` statement evaluates to false, the compiler executes the code inside the `else` block.
+
+```cpp
+if (condition) {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+else {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+```
+
+### Nested else-if Statement
+
+In C++, we can use the `else-if` statement to check multiple conditions in a program.
+
+```cpp
+if (condition) {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+else if (condition) {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+else {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+
+}
+```
+
+### Switch Statement
+
+The `switch` statement evaluates the given expression and then compares its value with each case label. If the value of a case label equals the value of the expression, the statement(s) specific to that case is executed.
+
+```cpp
+switch (expression) {
+
+  case value1:
+  //code body
+  break;
+
+  case value2:
+  //code body
+  break;
+  .
+  .
+  .
+  default:
+  //code body
+}
+```
+
+Switch expression and case label accept variables of `int` or `char` data types.
+
+When the compiler encounters a break statement, it transfers control to the line after the switch block.
+
+If the value of the expression does not match any of the case labels, the `default` case is executed.
+
+If we don't add a `break` statement to a case, the code specific to all the proceeding cases is also executed.
+
+#### Example program for ranges of values
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  // Initialize variable money
+  int money = 6;
+  switch (money) {
+    // first case
+  case 20 ... 100:
+    cout << "You can gift a watch" << endl;
+    break; 
+    // compares value of case label from 10 to 19 with the value of money
+  case 10 ... 19:
+    cout << "You can gift a comic book " << endl;
+    break;
+    // compares value of case label from 9 to 5 with the value of money
+  case 5 ... 9:
+    cout << "You can gift a chocolate " << endl;
+    break;
+    // default case
+  default:
+    cout << "You can gift a pen " << endl;
+  }
+  return 0;
+}
+```
+
+### Conditional Operator
+
+The conditional operator evaluates the given condition and returns the result accordingly.
+
+```cpp
+(condition) ? expression1 : expression 2
+```
+
+`expression1` is executed when condition is true and `expression2` is executed when condition is false.
+
+## Loops
+
+In computer language, loops allow you to repeat a particular block of code until the specified condition is met.
+
+Advantages:
+
+- Execute a particular piece of code multiple times
+- Avoid duplication in our code
+- Make the code more readable
+- Save our time
+- Create an efficient and manageable program
+- Make programming fun
+
+In C++, we have:
+
+- while loop
+- do-while loop
+- for loop
+
+### while loop
+
+The `while` loop keeps executing a particular code block until the given condition is true. It does not know in advance how many times the loop body should be executed.
+
+The condition in the while loop is evaluated before executing the statements inside its body. Therefore, the while loop is called an entry-controlled loop.
+
+```cpp
+while (condition) {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+```
+
+### do-while loop
+
+The `do-while` loop is similar to the `while` loop, with the exception that it executes the block of code and then checks the given condition. Because of this, it is called an exit-controlled loop.
+
+```cpp
+do {
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+} while (condition);
+```
+
+### for loop
+
+The `for` loop keeps executing a particular code block as long as the given condition is true.
+
+```cpp
+for (counter = 0; counter < 2; counter++){
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+```
+
+### Infinite loop
+
+The infinite loop keeps executing repeatedly and never terminates.
+
+```cpp
+for ( ; ; ){
+  statement1;
+  statement2;
+  .
+  .
+  .
+  statementN;
+}
+```
+
+The termination condition was not specified in the `for` loop, therefore, the loop assumes that the condition is `true` and keeps executing the loop body.
+
+### Nested Loop
+
+A loop inside the body of another loop is called a nested loop.
+
+```cpp
+for (outer = 0; outer < 2; outer++){
+  // body of outer for loop
+  for (inner = 0; inner < 2; inner++){
+    // body of inner for loop
+  }
+  // body of outer for loop
+}
+```
+
+We can have multiple loops inside the body of a loop.
+
+### break Statement
+
+The break statement terminates the loop and transfers control to the very next statement after the loop body.
+
+### continue Statement
+
+The continue statement makes the compiler skip the current iteration and move to the next one.
