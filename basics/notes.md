@@ -859,3 +859,218 @@ If two variables with the same name are declared twice within the same scope, th
 ### Function Overloading
 
 Function overloading is the concept of affecting a function's behaviour based on the number of parameters or their types.
+
+```cpp
+#include <iostream>
+#include <string.h>
+
+float min(float x, float y){
+    return (x < y) ? x : y;
+}
+
+float min(float x, float y, float z){
+    return x < y ? (x < z ? x : z) : (y < z ? y : z);
+}
+
+int main() {
+  float f = min(4.45F, 1.23f);
+  float f2 = min(4.45f, 1.23f, 0.19f);
+
+  std::cout << f << std::endl;
+  std::cout << f2 << std::endl;
+}
+```
+
+```cpp
+Output
+1.23
+0.19
+```
+
+#### Rules for choosing the right function
+
+- We need to search for a function with the exact type
+- We need to apply type promotion to the arguments
+- We need to convert arguments
+
+The compiler ignores references when overloading functions. For example, `min(int x, int y)` is the same as `min(int &x, int &y)`. The `const` and `volatile` qualifiers are also ignored.
+
+#### Name Mangling (ChatGPT generated)
+
+Name mangling is a process by which the names of functions and variables in C++ are encoded into a unique string that includes information about their signature and namespace. This is done to ensure that every function and variable has a unique name, even if they have the same name but different arguments, or are defined in different namespaces.
+
+In C++, name mangling is necessary to support function overloading and to avoid naming conflicts between different libraries. When you declare a function with the same name as an existing function, the C++ compiler distinguishes them based on their parameter types and creates a unique mangled name for each one.
+
+For example, consider the following C++ code:
+
+```cpp
+#include <iostream>
+
+void foo(int x) {
+    std::cout << "foo(int): " << x << std::endl;
+}
+
+void foo(double x) {
+    std::cout << "foo(double): " << x << std::endl;
+}
+
+int main() {
+    foo(42);
+    foo(3.14);
+    return 0;
+}
+```
+
+In this code, the foo function is overloaded with two different versions, one that takes an int and one that takes a double. When you compile this code, the compiler generates mangled names for these functions, which might look something like `_Z3fooi` and `_Z3food`.
+
+The exact rules for name mangling are implementation-dependent, but in general, the mangled name includes the function or variable name, the number and types of its parameters, and any namespace or class information. The mangled name is then used by the linker to link function calls to the correct implementation.
+
+While name mangling is typically transparent to the programmer, it can cause issues when working with third-party libraries that have different name mangling schemes or when trying to debug code using a tool that doesn't understand name mangling.
+
+### Lambda Functions (?)
+
+A lambda function, or lambda, is a function without a name.
+
+It can be written in-place and doesn't require complete implementation outside the scope of the main program. A cool feature of lambdas is that they can be treated as data. Hence, they can be stored or copied in variables.
+
+#### Syntax for Lambdas
+
+```cpp
+[]  ()  ->  { . . . }
+```
+
+- \[ \]: captures the used variables
+- \( \): necessary for parameters
+- \-\>: necessary for complex lambda functions
+- \{ \}: function body, per default `const`.
+  - `[]() mutable -> {...}` has a non-constant function body.
+
+Lambdas are just function objects automatically created by the compiler. A function object is an instance of a class for which the call operator, `operator ()`, is overloaded. The main difference between a function and a function object is that a function object is an object and can, therefore, have a state.
+
+#### Closure
+
+Lambda functions can bind their invocation context. Within the square brackets, we can specify which variables we want the lambda to capture.
+
+|       **Binding**      |                 **Description**                 |
+|:----------------------:|:-----------------------------------------------:|
+|          `[ ]`         |                    no binding                   |
+|          `[a]`         |                   `a` per copy                  |
+|         `[&a]`         |                `a` per reference                |
+|          `[=]`         |           all used variables per copy           |
+|          `[&]`         |         all used variables per reference        |
+|        `[=, &a]`       |     per default per copy; `a` per reference     |
+|        `[&, a]`        |     per default per reference; `a` per copy     |
+|        `[this]`        | data and member of the enclosing class per copy |
+| `[l= std::move(lock)]` |               moves `lock` (C++14)              |
+
+#### Generic lambda functions
+
+With C++14, we have generic lambdas, which means that lambds can deduce their argument types.
+
+A generic lambda is a function template.
+
+A lambda should be short and concise.
+
+A lambda should be self-explanatory, especially since it does not have a name.
+
+## Recursion
+
+A function that calls itself repeatedly until some condition is met is known as a recursive function. The process whereby a function repeatedly calls itself until a condition is met is known as recursion.
+
+### Structure of a Recursive Program
+
+```cpp
+ReturnType RecursiveFunction (Input parameters)
+
+if (base case condition)    // Base Case
+{
+  return value;
+}
+else                        // Recursive Case
+{
+  return RecursiveFunction (Input parameters)
+}
+```
+
+- `if`: represents the base case when the function should stop calling itself. It simply returns the result to the calling point.
+- `else`: represents the recursive case when the function calls itself repetitively until it reaches a base case.
+
+The purpose of the main function is to serve as a starting point for a program. Therefore, the main function is not called recursively in a program.
+
+Whenever we write a recursive function, we break a complex problem into a smaller subproblem and a simpler version of itself.
+
+The condition where the function stops calling itself in its body is known as the **base case**.
+
+Every recursive function must have a base case or an error is generated because of memory overflow.
+
+### Advantages of recursion
+
+- Recursion is a very powerful tool when we can define the problem in terms of itself.
+- Recursion helps to write shorter code.
+- We can convert loops into a recursive function.
+
+### Differences between recursion and iteration
+
+- In the computer language, iteration allows you to repeat a particular set of instructions until the specified condition is met. The recursive function allows you to keep calling itself in the function body until some condition is met.
+- The sole purpose of iteration and recursion is to achieve repetition. Loops achieve repetition through the repetitive structure, whereas recursion achieves repetition through repetitive function calls.
+- Iteration terminates when the loop condition fails. On the other hand, recursion terminates when the base condition evaluates to true.
+- Iteration happens inside the same function, which is why it takes less memory. In the recursive function, there is the overhead of function calls that makes our program slow and consumes more memory.
+- In iteration, our code size is very large. Meanwhile, recursion helps to write shorter code.
+- Iterative code is faster than recursive code.
+- Infinite loops will stop further execution of the program but do not lead to system crash. Infinite recursive calls, on the other hand, will result in a CPU crash because of memory overflow.
+
+## Arrays
+
+An array is a sequential collection of values of the same data type under the same name. It is a derived data type.
+
+- Element - a value stored in an array. Elements in an array are stored at neighnoring memory locations.
+- Index - an array index identifies the position of an element in an array. It starts from 0 and increments by one for each element added in an array.
+- Size - the size of an array is the total number of elements that can be stored in the array.
+
+### Use case
+
+Suppose there are 100 students in a class, and you want to store their roll numbers. Declaring 100 variables and then storing the roll number of each student is quite an impractical approach. Here, arrays will come in handy!
+
+### Declaration of an Array
+
+```cpp
+DataType ArrayName [ArraySize] ;
+```
+
+```cpp
+int Roll_Number[100];
+```
+
+Here, we declare an array `Roll_Number` that can store 100 integer values. The compiler reserves space for 100 elements of type `int` consecutively in memory. Since the data type of an element is `int`, it reserves 4 bytes for each element, and in total, 400 bytes with the name `Roll_Number`.
+
+### Initialization of an Array
+
+#### Approach 1
+
+We can assign a value to an array by accessing its index.
+
+```cpp
+ArrayName [ArrayIndex] = value;
+```
+
+```cpp
+  Roll_Number[2] = 102;
+```
+
+The code above initializes the element of index 2 of the array `Roll_Number` to the value `102`.
+
+#### Approach 2
+
+We can assign a value to the array elements in the declaration step.
+
+```cpp
+DataType ArrayName [] = {value1, value2, ..., valueN};
+```
+
+```cpp
+  int Roll_Number[ ] = { 100, 101, 102, 103, 104 };
+```
+
+If we are initializing an array in the declaration step, we don't need to specify the size of the array. The compiler automatically determines its size.
+
+If we initialize an array with elements fewer than its total size, the compiler automatically initializes the remaining elements with their default values.

@@ -13,9 +13,9 @@ The syllabus is based on <https://www.educative.io/path/cpp-for-programmers>
 - [x] Operators
 - [x] Conditional Statements
 - [x] Loops
-- [ ] Functions
-- [ ] Recursion
-- [ ] Arrays
+- [x] Functions
+- [x] Recursion
+- [x] Arrays
 - [ ] Pointers
 - [ ] Dynamic Memory Allocation
 - [ ] Structures
