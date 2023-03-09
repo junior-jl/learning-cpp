@@ -1074,3 +1074,112 @@ DataType ArrayName [] = {value1, value2, ..., valueN};
 If we are initializing an array in the declaration step, we don't need to specify the size of the array. The compiler automatically determines its size.
 
 If we initialize an array with elements fewer than its total size, the compiler automatically initializes the remaining elements with their default values.
+
+### Array Traversal
+
+We can access the elements stored in an array by writing the array name, which is followed by its index in the square brackets.
+
+```cpp
+ArrayName [Index] ;
+```
+
+If you try to access an index that is greater than the size of an array, the compiler won’t generate an error, but may give you an unexpected output.
+
+### Arrays and Functions
+
+To pass an array to a function, we just have to specify the array type, followed by an array name and square brackets in the function parameters.
+
+```cpp
+ReturnType FunctionName (int ArrayName[])
+{
+  // Function Body
+}
+
+int main ()
+{
+  // Function body
+  FunctionName(ArrayName)
+}
+```
+
+By default, arrays are passed by reference!
+
+### Two-Dimensional Array
+
+A two-dimensional array is an array of arrays. It represents a matrix. We can access the elements in a two-dimensional array by the rows and columns index.
+
+```cpp
+DataType ArrayName [RowSize][ColumnSize] ;
+```
+
+#### Initialization of a two-dimensional array
+
+```cpp
+DataType ArrayName [][] = {{value1, ..., N}, ..., {value1, ..., N}};
+```
+
+If we initialize an array with elements fewer than its total size, it automatically initializes the remaining elements with their default values.
+
+When initializing a 2-D array, specifying the first dimensional is optional. The compiler will infer the number of rows from the statement.
+
+If we aren't initializing a 2-D array, all of its dimensions must be specified.
+
+## Pointers
+
+A computer's memory can be thought of as an array of bytes.
+
+The number that uniquely identifies the location in the memory is known as the memory address.
+
+### Address of a Variable
+
+During the compilation time, the compiler maps each variable name to the unique memory address in the memory. Our machine accesses and modifies all the data by their addresses in the computer’s memory. But why use an identifier when we can access our data using the memory address?
+
+Identifiers have to be used because we have to declare multiple variables in a single program, so it must be difficult for the human to remember all the addresses. Therefore, we use identifiers to keep things simple.
+
+### Address-of operator
+
+The address-of operator (\&) is a unary operator. It is used to extract the memory address of the variable.
+
+The memory address depends upon your machine. Therefore, if you run the same program on a different machine, you will get a different memory address.
+
+### Concept of pointer
+
+In C++, a pointer is a variable that stores the address of another variable.
+
+### Pointer declaration
+
+To declare a variable as a pointer, its identifier must be preceded by an asterisk \*. When we use \* before the identifier, it indicates that the variable beign declared is a pointer.
+
+```cpp
+DataType *identifier;
+```
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  // Declares a pointer variable John
+  int *John = nullptr;
+  return 0;
+}
+```
+
+This declares a pointer `John`, and its sole purpose is to store the address of some other variable. Here, `John` only points to the value whose data type is `int`. Therefore, we can say that John is a pointer to `int`.
+
+It's considered a best practice to set a pointer to `nullptr` when it is declared, unless it is initialized to some valid address.
+
+It's a good practice to use ptr in a pointer's variable name. It indicates that a variable is a pointer, and must be handled differently.
+
+If we declare multiple pointers in the same line, we must use an asterisk before each identifier.
+
+### Pointer Initialization
+
+```cpp
+ptrVariable = &Variable;
+```
+
+If we don't initialize a pointer, it is automatically initialized to 0.
+
+### Dereferencing Operator

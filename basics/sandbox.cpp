@@ -18,6 +18,9 @@ int count_digits(int number) {
 
 int main()
 {
-    std::cout << "digits = " << count_digits(33);
+    std::cout << "digits = " << count_digits(33) << std::endl;
+    
+    int test[] = {1, 2};
+    std::cout << test[5];
     return 0;
 }
