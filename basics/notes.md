@@ -1183,3 +1183,320 @@ ptrVariable = &Variable;
 If we don't initialize a pointer, it is automatically initialized to 0.
 
 ### Dereferencing Operator
+
+The dereference operator \* is a unary operator. It gives the value of the variable to which the pointer is pointing. This process is known as dereferencing a pointer.
+
+Trying to dereference an uninitialized or null pointer generates an error.
+
+### References
+
+A reference is an alias for an existing variable. It can be created using the \& operator.
+
+Once created, the reference can be used instead of the actual variable. Altering the value of the reference is equivalent to altering the referenced variable.
+
+```cpp
+  int i = 20;
+  int& iRef = i;
+```
+
+A reference is never `nullptr`. Therefore, it must always be initialized by having an existing variable assigned to it.
+
+References behave like constant pointers. A reference always refers to its initial variable.
+
+References allow functions to modify the value of a variable. When a normal variable is passed to a function, a copy of its value is made and the variable itself remains untouched. However, if a reference is passed, the actual value of the variable is used and can therefore be modified.
+
+```cpp
+void xchg(int& x, int& y)
+{
+  int t = x;
+  x = y;
+  y = t;
+}
+
+int main()
+{
+  int a = 10;
+  int b = 15;
+  xchg(a, b);
+}
+```
+
+Compared to when using pointers, notice the cleaner syntax.
+
+```cpp
+void xchg(int *x, int *y)
+{
+  int t = *x;
+  *x = *y;
+  *y = t;
+}
+
+int main()
+{
+  int a = 10;
+  int b = 15;
+  xchg(&a, &b);
+}
+```
+
+In short, references provide a more convenient way to access variables from inside other functions. This functionality is also very useful when dealing with a large argument. Passing it by value would mean that a copy has to be made in the function. This is memory-intensive.
+
+### Functions and Pointers
+
+There is another way to pass arguments to the function that is passed by reference with a pointer parameter. The function pointer parameter receives the address of the parameter. Then, it uses the dereference operator to access the value of the variable.
+
+```cpp
+return_type function_name (parameter_type *number);
+.
+.
+.
+int main()
+{
+  int num = 10;
+  function_name (&num);
+}
+```
+
+## Dynamic Memory Allocation
+
+In C++, we can allocate memory in two ways:
+
+- Static allocation
+- Dynamic allocation
+
+In static allocation, a fixed amount of memory is allocated to the variables or arrays before the execution of the program (during compile-time), and we cannot request more memory while the program runs.
+
+Hence, we must know the size of an array or variable during the compile time and memory is allocated and deallocated to the variables by the compiler.
+
+Dynamic allocation is needed when you don't know in advance how much memory is needed to store the data.
+
+In dynamic allocation:
+
+- We can get as much memory as we want during the program execution
+- Memory is allocated and deallocated by the programmer during the run-time
+
+### Allocation of dynamic memory
+
+- First, allocate the dynamic space.
+- Then, store the starting address of the dynamic space in the pointer.
+
+The unary operator `new` allocates memory in bytes during the run time from the free store.
+
+The basic syntax for getting memory during the run-time is
+
+```cpp
+new datatype;
+```
+
+To store the starting address returned by the new operator, we use pointers.
+
+```cpp
+datatype *pointer = new datatype;
+```
+
+We can access the content of the dynamic space pointed by the pointer using the dereference operator * before the pointer.
+
+### Deallocation of Dynamic Memory
+
+The compiler automatically deallocates the static space when it is not used anymore. Since dynamically allocated memory is managed by a programmer, when dynamically allocated space is not required anymore, we must free it.
+
+The `delete` operator allows us to free the dynamically allocated space.
+
+```cpp
+delete pointer;
+```
+
+It’s good practice to set the pointer to nullptr after deallocation, unless you are pointing to some other valid target.
+
+### Dynamic Arrays
+
+Dynamic arrays can grow or shrink during the program execution.
+
+#### Declaration of a dynamic array
+
+```cpp
+DataType *ArrayName = new DataType [size];
+```
+
+#### Initialization of a dynamic array
+
+We can initialize a dynamic array just like a static array.
+
+```cpp
+ArrayName[Index] = Value;
+```
+
+#### Deallocating array
+
+```cpp
+delete []ArrayName;
+```
+
+#### Resizing dynamic array
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+// printArray function
+void printArray(int arr[], int size) {
+  for (int i = 0; i < size; i++) {
+    cout << arr[i] << " ";
+  }
+  cout << endl;
+}
+
+// main function
+int main() {
+  // Initialize variable size
+  int size = 5;
+  // Create Array 
+  int * Arr = new int[size];
+  // Fill elements of an array
+  for (int i = 0; i < size; i++) {
+    Arr[i] = i;
+  }
+  // Call printArray function 
+  printArray(Arr, size);  
+  // Create new array
+  int * ResizeArray = new int[size + 2];
+  // Copy elements in new arary
+  for (int i = 0; i < size; i++) {
+    ResizeArray[i] = Arr[i];
+  }
+  // Delete old array
+  delete[] Arr;
+  // Pointer Array will point to ResizeArray
+  Arr = ResizeArray;
+  // Store new values
+  Arr[size] = 90;
+  Arr[size + 1] = 100;
+  // Call printArray function
+  printArray(Arr, size + 2);
+}
+```
+
+## Structures
+
+The Structure is a user-defined data type that is used to store variables or arrays of different data types under a single name.
+
+Since it is a user-defined data type. We must tell the compiler what our structure will look like before using it.
+
+```cpp
+struct struct_name{
+  datatype member1;
+  datatype member2;
+  .
+  .
+  .
+  datatype memberN;
+};
+```
+
+When a structure is created, the computer does not allocate any memory to it.
+
+We must declare the structure variable in a program.
+
+```cpp
+struct_name variable_name;
+```
+
+The structure variables can also be declared after the structure definition in a program.
+
+To declare a structure variable in a structure definition, we write the struct keyword followed by the name of the structure, which is further followed by structure variable names and a semicolon.
+
+### Initializing and Accessing Members of a Structure
+
+```cpp
+structure_variable.member_variable = value;
+```
+
+To access the member of the structure variable, we write the name of the structure variable, followed by a dot operator, which is further followed by the name of the member.
+
+We can initialize structure variables in one line using the initializer list.
+
+```cpp
+structure_variable = {member1_value, member2_value, ..., memberN_value};
+```
+
+ℹ️ If the initializer list does not have some member of structure variables, those members are automatically initialized to their default value.
+
+### Array of Structures
+
+```cpp
+#include <iostream>
+
+using namespace std;
+// structure Student
+struct Student {
+  string name;
+  int roll_number;
+  int marks;
+};
+// main function
+int main() {
+  struct Student s[100];
+
+  s[0] = {"John", 1, 50};
+
+  cout << "s1 Information:" << endl;
+  cout << "Name = " << s[0].name << endl;
+  cout << "Roll Number = " << s[0].roll_number << endl;
+  cout << "Marks = " << s[0].marks << endl;
+
+  s[1] = {"Alice", 2, 43};
+
+  cout << "s2 Information:" << endl;
+  cout << "Name = " << s[1].name << endl;
+  cout << "Roll Number = " << s[1].roll_number << endl;
+  cout << "Marks = " << s[1].marks << endl;
+
+  return 0;
+}
+```
+
+### Structure and Functions
+
+To pass a structure as a function argument...
+
+```cpp
+return_type function_name (struct_name structure_variable);
+
+int main()
+{
+  struct_name structure_variable;
+  function_name(structure_variable);
+}
+```
+
+### Structure and Pointers
+
+The pointer that stores the address of the structure variable is known as a structure pointer.
+
+```cpp
+structure_name *ptr;
+```
+
+#### Accessing structure members through a structure pointer
+
+- Indirection and the dot operator
+- Arrow operator
+
+The basic syntax for accessing the structure members through the structure pointer is given below:
+
+```cpp
+(*StructurePointer).StructureMember;
+```
+
+To access the members of the structure variable to which the structure pointer is pointing, we will first use the dereference operator with a structure pointer, which is followed by the dot operator and the member whose value you want to access.
+
+The precedence of dot operator `.` is greater than the precedence of indirection operator `->`. Therefore, it is necessary to put brackets around the asterisk, which is followed by a pointer name.
+
+This can also be done using the arrow operator.
+
+```cpp
+StructurePointer->StructureMember;
+```
+
+`(*ptrs1).name` and `ptrs1->name` are functionally equivalent.
