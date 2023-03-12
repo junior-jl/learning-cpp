@@ -1,8 +1,24 @@
+/*
+Problem-1 
+Background:
+Simpson University's president, Homer Simpson, has spent so much time doing "random walks" because of his high consumption of Duff Beer products, that he figures he can save a lot of time by having you program the random walk for him! Further, he won't have to waste precious "couch time" on his feet.
+Specifications: 
+Your program is to produce what is known as "random walks". To clarify, imagine you start at a base point (if you are mathematically inclined, you could call it the origin) and move some random distance in some random direction (in a straight line) to a new point (x1, y1). When you get to this point, you again move some random distance in some random direction to another new point, say (x2, y2). Repeating this procedure N times creates a "random walk". You end up at the point (xN, yN). If you were Homer, at this point you might fall down and sleep it off, possibly losing your wallet, watch, dignity, and some saliva. Thus, it is a good idea to remember where you landed.
+You are to generate M of these walks, keeping track of the final points in an array for later reference. Homer figures he might have to return to the point in the gutter where he slept last night in order to look for his wallet, watch, dignity, whatever. After generating this set of random walks, you will report (output) the average distance from the starting point to the ending points of the walks. 
+To do this, of course, you will calculate the distances and average them. You will also report the shortest, longest, and median walk distance. (The median of a data set is the point above which half the data lie and below which half the data lie. If the size of the data set is odd, then the median is a data point. If the size of the data set is even, then the median is the average of the middle two data points.) In order for you to find the median, you will have to sort the array of points (increasing order) by distance.
+It needn't be said at this point, but I will: you will use functions in this assignment fully. You now decide how to break up the program into functions.
+Special Stuff: 
+So, you will use the rand() function to generate two things for each segment of a walk: the length of the walk (before another turn) and the angle to describe the direction of the walk. For this assignment, use the positive angle counterclockwise from the positive x-axis to determine the direction of the walk segment. So, generate a random number between 0 and 359 to represent the degree angle. Then, you will have to convert that to radians. Why? Because in order to determine the ending point, you will use the sin and cos functions from <cmath> (also to be included). These functions take radian arguments and return doubles. You can figure out the mathematics (trigonometry).
+You will notice that there needn't be any user input for this program!
+
+*/
+
 #include <cmath>
 #include <iostream>
 
-#define M 5
-#define POINTS 10
+
+const int M = 5;
+const int POINTS = 10;
 using namespace std;
 // Random walk structure
 
@@ -99,7 +115,7 @@ void sort_distances(double arr[], int size)
 {
     for (int i = 0; i < size; i++)
     {
-        for (int j = 0; j < size - 1; j++)
+        for (int j = 0; j < i; j++)
         {
             if (arr[j] > arr[i])
             {

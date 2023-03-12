@@ -1,3 +1,5 @@
+// Problem 5
+
 /*LinkedList is a simple data structure in which each element point to the other element   
 In this problem a linked list is given to you, write a function deleteAtIndex() in it so that node at a specific index could be deleted.
  Here is the main function:
@@ -92,7 +94,7 @@ int main() {
   lst.printList();
 
   // Calling Delete
-  lst.deleteAtIndex(4);
+  lst.deleteAtIndex(0);
 
   lst.printList();        // Now result must equal to 2->3->4->5
   return 0;
