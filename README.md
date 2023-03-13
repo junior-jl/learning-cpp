@@ -19,8 +19,6 @@ The syllabus is based on <https://www.educative.io/path/cpp-for-programmers>
 - [x] Pointers
 - [x] Dynamic Memory Allocation
 - [x] Structures
-- [ ] Project 1: Grayscale to binary image
-- [ ] Project 2: Hangman Game
 
 ## Object-oriented Programming
 
