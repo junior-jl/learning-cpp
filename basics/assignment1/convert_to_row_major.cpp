@@ -1,3 +1,7 @@
+// Problem 4
+// Write a function for the matrix which converts it into row-major order. The matrix must be of variable rows and columns input by the user (hint: use 2d pointers). The result returned by the function should be a single array.
+
+
 #include <iostream>
 
 using namespace std;
