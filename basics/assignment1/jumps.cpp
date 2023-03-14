@@ -20,6 +20,8 @@ using namespace std;
 
 int jumps(int arr[], int size)
 {
+    // longest -> furthest index which can be reached (from the current index) with the current jumps
+    // end -> furthest index that can be reached with the current jumps
     int longest = 0, end = 0, jumps = 0;
     for (int i = 0; i < size; i++)
     {
